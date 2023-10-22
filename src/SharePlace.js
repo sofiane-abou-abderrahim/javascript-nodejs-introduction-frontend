@@ -32,7 +32,6 @@ class PlaceFinder {
   }
 
   selectPlace(coordinates, address) {
-    // accepts both arguments now
     if (this.map) {
       this.map.render(coordinates);
     } else {
@@ -54,10 +53,11 @@ class PlaceFinder {
       })
       .then(data => {
         const locationId = data.locId;
-        // we want to create a sharable link and output it in my-place/index.html
         this.shareBtn.disabled = false;
         const sharedLinkInputElement = document.getElementById('share-link');
-        sharedLinkInputElement.value = `${location.origin}/my-place?location=${locationId}`;
+        sharedLinkInputElement.value = `${
+          location.origin
+        }/my-place?location=${locationId}`;
       });
   }
 
@@ -76,12 +76,12 @@ class PlaceFinder {
     navigator.geolocation.getCurrentPosition(
       async successResult => {
         const coordinates = {
-          lat: successResult.coords.latitude + Math.random() * 50, // to not display my current position
-          lng: successResult.coords.longitude + Math.random() * 50 // to not display my current position
+          lat: successResult.coords.latitude + Math.random() * 50,
+          lng: successResult.coords.longitude + Math.random() * 50
         };
-        const address = await getAddressFromCoords(coordinates); // we get the address now
+        const address = await getAddressFromCoords(coordinates);
         modal.hide();
-        this.selectPlace(coordinates, address); // now we forward the address here
+        this.selectPlace(coordinates, address);
       },
       error => {
         modal.hide();
@@ -104,21 +104,12 @@ class PlaceFinder {
       'Loading location - please wait!'
     );
     modal.show();
-
-    /* 
-    
-    Next, we need to make sure that we reach out to Google's servers because they do have an API for us 
-    which we can use to translate the entered address (which could be something like a street name) into coordinates
-    (see Utility/Location.js) This should be a file which holds utility methods for getting coordinates for an address for example
-
-    */
-
     try {
-      const coordinates = await getCoordsFromAddress(address); // we get the coordinates
-      this.selectPlace(coordinates, address); // we forward the coordinates and address in exactly the same format we would get them if we auto locate the user
+      const coordinates = await getCoordsFromAddress(address);
+      this.selectPlace(coordinates, address);
     } catch (err) {
-      alert(err.message); // this will display the error message set in Location.js
-    } // because it might fail though
+      alert(err.message);
+    }
     modal.hide();
   }
 }

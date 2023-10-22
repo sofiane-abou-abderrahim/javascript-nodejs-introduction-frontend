@@ -11,10 +11,13 @@ export class Map {
     }
 
     const map = new google.maps.Map(document.getElementById('map'), {
-      center: coordinates,
+      center:coordinates,
       zoom: 16
     });
 
-    new google.maps.Marker({ position: coordinates, map: map });
+    new google.maps.Marker({
+      position: coordinates,
+      map: map
+    });
   }
 }

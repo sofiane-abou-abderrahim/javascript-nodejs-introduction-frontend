@@ -4,6 +4,7 @@ export class Modal {
     this.contentTemplateEl = document.getElementById(contentId);
     this.modalTemplateEl = document.getElementById('modal-template');
   }
+
   show() {
     if ('content' in document.createElement('template')) {
       const modalElements = document.importNode(
