@@ -1,6 +1,11 @@
 import { Modal } from './UI/Modal';
 import { Map } from './UI/Map';
 import { getCoordsFromAddress, getAddressFromCoords } from './Utility/Location';
+import { key } from '../key';
+
+document.querySelector(
+  'script'
+).src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=Function.prototype`;
 
 class PlaceFinder {
   constructor() {

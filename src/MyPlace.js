@@ -1,4 +1,9 @@
 import { Map } from './UI/Map';
+import { key } from '../key';
+
+document.querySelector(
+  'script'
+).src = `https://maps.googleapis.com/maps/api/js?key=${key}&callback=Function.prototype`;
 
 class LoadedPlace {
   constructor(coordinates, address) {
