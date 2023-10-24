@@ -21,6 +21,9 @@ fetch('http://localhost:3000/location/' + locId)
     if (response.status === 404) {
       throw new Error('Could not find location!');
     }
+    if (response.status === 500) {
+      throw new Error('Invalid id!');
+    }
     return response.json();
   })
   .then(data => {
